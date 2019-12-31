@@ -1,0 +1,26 @@
+﻿@model IEnumerable<AccessoryId>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<table class="table-condensed">
+
+    @foreach (var accessory in Model)
+    {
+        <tr>
+        <td> @accessory.AccessoryId1 </td>
+        <td> @accessory.AccName </td>
+        <td> @accessory.DescriptionOfAccessory </td>
+        <td> @accessory.Price </td>
+        <td> @accessory.Vat </td>
+        <td> @accessory.Inventory </td>
+        <td> @accessory.PartnerId </td>
+
+        </tr>
+    }
+</table>
