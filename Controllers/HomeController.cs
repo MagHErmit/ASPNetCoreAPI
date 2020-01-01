@@ -9,23 +9,25 @@ using ASPNetCoreAPI.Models;
 
 namespace ASPNetCoreAPI.Controllers
 {
+    public class abc
+    {
+        public int a { get; set; }
+        public int b { get; set; }
+    }
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
         
-        xismhdqwContext db;
-        public HomeController(ILogger<HomeController> logger, xismhdqwContext context)
+        public HomeController(ILogger<HomeController> logger)
         {
-            db = context;
             _logger = logger;
         }
         
         public IActionResult Index()
         {
-            return View(db.AccessoryId.ToList());
+            return View();
         }
         
-       
         public IActionResult Privacy()
         {
             return View();

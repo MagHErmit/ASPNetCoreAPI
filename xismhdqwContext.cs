@@ -31,16 +31,16 @@ namespace ASPNetCoreAPI
         public virtual DbSet<SalesPerson> SalesPerson { get; set; }
         public virtual DbSet<Vat> Vat { get; set; }
         public virtual DbSet<Wood> Wood { get; set; }
-
+        
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
 /*#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.*/
-                optionsBuilder.UseNpgsql("Host=packy.db.elephantsql.com;Port=5432;Database=xismhdqw;Username=xismhdqw;Password=cenFKu8gn1_aVRPtm2FDysZVyaOIrBT9");
+                optionsBuilder.UseNpgsql("Host=packy.db.elephantsql.com;Port=5432;Database=xismhdqw;Username=xismhdqw;Password=cenFKu8gn1_aVRPtm2FDysZVyaOIrBT9;Keepalive=1");
             }
         }
-
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasPostgresExtension("btree_gin")

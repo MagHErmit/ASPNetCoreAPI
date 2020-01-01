@@ -33,14 +33,13 @@ namespace ASPNetCoreAPI
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             
-                app.UseDeveloperExceptionPage();
+            app.UseDeveloperExceptionPage();
             
            
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
-
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

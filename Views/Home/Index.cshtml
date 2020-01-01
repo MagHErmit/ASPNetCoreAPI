@@ -1,25 +1,20 @@
-﻿@model IEnumerable<AccessoryId>
-@{
-    ViewData["Title"] = "Home Page";
+﻿@{
+    ViewData["Title"] = "Давайте";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Not Welcome</h1>
 </div>
 
 <table class="table-condensed">
 
-    @foreach (var accessory in Model)
+    @for (int i = 0; i < 13; i++)
     {
         <tr>
-        <td> @accessory.AccessoryId1 </td>
-        <td> @accessory.AccName </td>
-        <td> @accessory.DescriptionOfAccessory </td>
-        <td> @accessory.Price </td>
-        <td> @accessory.Vat </td>
-        <td> @accessory.Inventory </td>
-        <td> @accessory.PartnerId </td>
+        <td> Вы кто такие? </td>
+        <td> Я вас не звал </td>
+        <td> Идите лесом отсюда </td>
+        <td><img src="https://www.meme-arsenal.com/memes/067ed222b66c9b203f32bed7e9e56d76.jpg"/></td>
 
         </tr>
     }
