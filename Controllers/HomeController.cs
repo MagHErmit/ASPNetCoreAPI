@@ -17,10 +17,11 @@ namespace ASPNetCoreAPI.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        
-        public HomeController(ILogger<HomeController> logger)
+        xismhdqwContext db;
+        public HomeController(ILogger<HomeController> logger, xismhdqwContext context)
         {
             _logger = logger;
+            db = context;
         }
         
         public IActionResult Index()
@@ -28,9 +29,9 @@ namespace ASPNetCoreAPI.Controllers
             return View();
         }
         
-        public IActionResult Privacy()
+        public JsonResult Get(string name, string id)
         {
-            return View();
+            return Json(name);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

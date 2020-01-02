@@ -16,6 +16,7 @@ namespace ASPNetCoreAPI
         }
 
         public virtual DbSet<AccessoryId> AccessoryId { get; set; }
+        public virtual DbSet<Auth> Auth { get; set; }
         public virtual DbSet<Boat> Boat { get; set; }
         public virtual DbSet<BoatType> BoatType { get; set; }
         public virtual DbSet<Colours> Colours { get; set; }
@@ -31,16 +32,16 @@ namespace ASPNetCoreAPI
         public virtual DbSet<SalesPerson> SalesPerson { get; set; }
         public virtual DbSet<Vat> Vat { get; set; }
         public virtual DbSet<Wood> Wood { get; set; }
-        
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
 /*#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.*/
-                optionsBuilder.UseNpgsql("Host=packy.db.elephantsql.com;Port=5432;Database=xismhdqw;Username=xismhdqw;Password=cenFKu8gn1_aVRPtm2FDysZVyaOIrBT9;Keepalive=1");
+                optionsBuilder.UseNpgsql("Host=packy.db.elephantsql.com;Port=5432;Database=xismhdqw;Username=xismhdqw;Password=cenFKu8gn1_aVRPtm2FDysZVyaOIrBT9");
             }
         }
-        
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasPostgresExtension("btree_gin")
@@ -92,6 +93,14 @@ namespace ASPNetCoreAPI
                 entity.Property(e => e.Price).HasColumnName("price");
 
                 entity.Property(e => e.Vat).HasColumnName("VAT");
+            });
+
+            modelBuilder.Entity<Auth>(entity =>
+            {
+                entity.HasKey(e => e.Username)
+                    .HasName("Auth_pkey");
+
+                entity.Property(e => e.Password).IsRequired();
             });
 
             modelBuilder.Entity<Boat>(entity =>
