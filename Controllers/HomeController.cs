@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ASPNetCoreAPI.Models;
+using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace ASPNetCoreAPI.Controllers
 {
@@ -29,9 +31,12 @@ namespace ASPNetCoreAPI.Controllers
             return View();
         }
         
-        public JsonResult Get(string name, string id)
+        public JsonResult Get(string name, string? id)
         {
-            return Json(name);
+            var type = Assembly.GetExecutingAssembly().GetTypes().FirstOrDefault(t => t.Name == name);
+            if (type != null)
+                DbSet catContext = db.Set(type);
+            return Json(db.AccessoryId.ToList());
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
