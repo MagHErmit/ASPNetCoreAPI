@@ -33,11 +33,19 @@ namespace ASPNetCoreAPI.Controllers
 
         public JsonResult Get(string name, string? id)
         {
-            if(id == "all") return Json(Getobject(name));
+            try
+            {
+                if (id == "all") return Json(Getobject(name));
 
-            Type tp = Assembly.GetExecutingAssembly().GetTypes().FirstOrDefault(t => t.Name == name);
-            
-            return Json(db.Find(tp, Convert.ToInt32(id)));
+                Type tp = Assembly.GetExecutingAssembly().GetTypes().FirstOrDefault(t => t.Name == name);
+                if (tp == null) throw new Exception();
+
+                return Json(db.Find(tp, Convert.ToInt32(id)));
+            }
+            catch
+            {
+                return Json(null);
+            }
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
