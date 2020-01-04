@@ -25,24 +25,39 @@ namespace ASPNetCoreAPI.Controllers
             _logger = logger;
             db = context;
         }
-        
+
         public IActionResult Index()
         {
             return View();
         }
-        
+
         public JsonResult Get(string name, string? id)
         {
-            var type = Assembly.GetExecutingAssembly().GetTypes().FirstOrDefault(t => t.Name == name);
-            if (type != null)
-                DbSet catContext = db.Set(type);
-            return Json(db.AccessoryId.ToList());
+            if(id == "all") return Json(Getobject(name));
+
+            Type tp = Assembly.GetExecutingAssembly().GetTypes().FirstOrDefault(t => t.Name == name);
+            
+            return Json(db.Find(tp, Convert.ToInt32(id)));
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        private object Getobject(string name)
+        {
+            PropertyInfo[] props = Assembly.Load("ASPNetCoreAPI").GetType("ASPNetCoreAPI.xismhdqwContext").GetProperties();  // get all Properties object
+            object obj = Assembly.Load("ASPNetCoreAPI").GetType("ASPNetCoreAPI.xismhdqwContext").GetConstructor(new Type[0]).Invoke(new object[0]);
+            foreach (PropertyInfo a in props)
+            {
+                if (a.Name.Equals(name))
+                {
+                    return a.GetValue(obj);
+                }
+            }
+            return null;
         }
     }
 }
