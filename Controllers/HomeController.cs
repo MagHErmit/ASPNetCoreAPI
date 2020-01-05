@@ -25,6 +25,7 @@ namespace ASPNetCoreAPI.Controllers
         public IActionResult Index()
         {
             return View();
+            
         }
 
         public JsonResult Get(string name, string? id)
