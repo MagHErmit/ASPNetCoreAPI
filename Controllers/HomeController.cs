@@ -12,11 +12,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace ASPNetCoreAPI.Controllers
 {
-    public class abc
-    {
-        public int a { get; set; }
-        public int b { get; set; }
-    }
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -27,7 +22,6 @@ namespace ASPNetCoreAPI.Controllers
             db = context;
         }
 
-        [Authorize]
         public IActionResult Index()
         {
             return View();
