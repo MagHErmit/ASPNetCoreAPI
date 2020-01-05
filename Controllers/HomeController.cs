@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using ASPNetCoreAPI.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ASPNetCoreAPI.Controllers
 {
@@ -26,6 +27,7 @@ namespace ASPNetCoreAPI.Controllers
             db = context;
         }
 
+        [Authorize]
         public IActionResult Index()
         {
             return View();
