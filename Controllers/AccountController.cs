@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
 
 namespace ASPNetCoreAPI.Controllers
 {
@@ -26,6 +27,25 @@ namespace ASPNetCoreAPI.Controllers
         {
             return View();
         }
+        public JsonResult AppLogin(string json)
+        {
+            try
+            {
+                JObject auth = JObject.Parse(json);
+                Auth user = _db.Auth.FirstOrDefault(u =>
+                    u.Username == (string) auth["username"] && u.Password == (string) auth["password"]);
+                if (user != null)
+                    return Json(user.CustomerId);
+                else
+                    return Json(-1);
+            }
+            catch
+            {
+                return Json(-1);
+            }
+            
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginModel model)
