@@ -3,12 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.IO;
+using System.Net.Cache;
+using System.Text;
+using System.Runtime.Serialization.Json;
 using ASPNetCoreAPI.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace ASPNetCoreAPI.Controllers
@@ -44,6 +50,36 @@ namespace ASPNetCoreAPI.Controllers
                 return Json(-1);
             }
             
+        }
+
+        public JsonResult AppRegistration(string json)
+        {
+            var result = new List<string>();
+
+            try
+            {
+                var inputJObject = JObject.Parse(json);
+                var authJson = inputJObject["auth"];
+                var customerJson = inputJObject["customer"];
+                if (_db.Auth.FirstOrDefault(m => m.Username == (string) authJson["username"]) != null)
+                    result.Add("Данный логин занят");
+                if (_db.Customers.FirstOrDefault(m => m.IdNumber == (string) customerJson["idNumber"]) != null)
+                    result.Add("По данному паспорту уже зарегестрирован аккаунт");
+
+                if (result.Count == 0)
+                {
+                    JSonHelper helper = new JSonHelper();
+                    Auth auth = helper.ConvertJSonToObject<Auth>(authJson.ToString());
+                    Customers customer = helper.ConvertJSonToObject<Customers>(customerJson.ToString());
+
+                    // TODO Add to db.
+                }
+            }
+            catch
+            {
+                result.Add("Проблема с регистрацией.");
+            }
+            return Json(result);
         }
 
         [HttpPost]
