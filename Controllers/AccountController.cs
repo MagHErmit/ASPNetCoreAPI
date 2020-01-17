@@ -88,10 +88,10 @@ namespace ASPNetCoreAPI.Controllers
         {
             if (ModelState.IsValid)
             {
-                Auth user = await _db.Auth.FirstOrDefaultAsync(u => u.Username == model.Login && u.Password == model.Password && u.UserType == 2); // Юзеры с типом 2 - админы.
+                Auth user = await _db.Auth.FirstOrDefaultAsync(u => u.Username == model.Login && u.Password == model.Password && (u.UserType == 2 || u.UserType == 3)); // Юзеры с типом 2 - админы, 3 - модеры.
                 if (user != null)
                 {
-                    await Authenticate(model.Login); // аутентификация
+                    await Authenticate(model.Login, user.UserType); // аутентификация
                     return RedirectToAction("Index", "Home");
                 }
                 ModelState.AddModelError("", "Некорректные логин и(или) пароль");
@@ -99,12 +99,13 @@ namespace ASPNetCoreAPI.Controllers
             return View(model);
         }
 
-        private async Task Authenticate(string userName)
+        private async Task Authenticate(string userName, int role)
         {
             // создаем один claim
             var claims = new List<Claim>
             {
-                new Claim(ClaimsIdentity.DefaultNameClaimType, userName)
+                new Claim(ClaimsIdentity.DefaultNameClaimType, userName),
+                new Claim(ClaimsIdentity.DefaultRoleClaimType, role.ToString())
             };
             // создаем объект ClaimsIdentity
             ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);

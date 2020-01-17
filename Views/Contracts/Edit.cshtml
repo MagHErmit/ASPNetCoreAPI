@@ -1,0 +1,59 @@
+﻿@model ASPNetCoreAPI.Contract
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Contract</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ContractId" />
+            <div class="form-group">
+                <label asp-for="Date" class="control-label"></label>
+                <input asp-for="Date" class="form-control" />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateDepositPayed" class="control-label"></label>
+                <input asp-for="DateDepositPayed" class="form-control" />
+                <span asp-validation-for="DateDepositPayed" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrderId" class="control-label"></label>
+                <input asp-for="OrderId" class="form-control" />
+                <span asp-validation-for="OrderId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ContractTotalPrice" class="control-label"></label>
+                <input asp-for="ContractTotalPrice" class="form-control" />
+                <span asp-validation-for="ContractTotalPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ContractTotalPriceIncVat" class="control-label"></label>
+                <input asp-for="ContractTotalPriceIncVat" class="form-control" />
+                <span asp-validation-for="ContractTotalPriceIncVat" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProductionProcess" class="control-label"></label>
+                <input asp-for="ProductionProcess" class="form-control" />
+                <span asp-validation-for="ProductionProcess" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

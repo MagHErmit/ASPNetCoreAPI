@@ -7,16 +7,146 @@
 </div>
 
 <table class="table-condensed">
-    <a asp-controller="Auths" asp-action="Index">Auth table</a>
-
-    @for (int i = 0; i < 13; i++)
-    {
-        <tr>
-            <td> Вы кто такие? </td>
-            <td> Я вас не звал </td>
-            <td> Идите лесом отсюда </td>
-            <td><img src="https://www.meme-arsenal.com/memes/067ed222b66c9b203f32bed7e9e56d76.jpg"/></td>
-
-        </tr>
-    }
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Таблица
+                </th>
+                <th>
+                    Тип пользователя
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <a asp-controller="Auths" asp-action="Index">Auth table</a>
+                </td>
+                <td>
+                    Admin
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a asp-controller="AccessoryIds" asp-action="Index">Accessory table</a>
+                </td>
+                <td>
+                    Admin
+                </td>
+            </tr>
+                <tr>
+                <td>
+                    <a asp-controller="Boats" asp-action="Index">Boats table</a>
+                </td>
+                <td>
+                    Admin
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a asp-controller="BoatTypes" asp-action="Index">BoatTypes table</a>
+                </td>
+                <td>
+                    Admin
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a asp-controller="Colours" asp-action="Index">Colors table</a>
+                </td>
+                <td>
+                    Admin
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a asp-controller="Customers" asp-action="Index">Users table</a>
+                </td>
+                <td>
+                    Admin
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a asp-controller="DocumentNames" asp-action="Index">DocumentNames table</a>
+                </td>
+                <td>
+                    Admin
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a asp-controller="Fits" asp-action="Index">Fits table</a>
+                </td>
+                <td>
+                    Admin
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a asp-controller="Partners" asp-action="Index">Partners table</a>
+                </td>
+                <td>
+                    Admin
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a asp-controller="ProductionProcesses" asp-action="Index">ProductionProcesses table</a>
+                </td>
+                <td>
+                    Admin
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a asp-controller="SalesPersons" asp-action="Index">Managers table</a>
+                </td>
+                <td>
+                    Admin
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a asp-controller="Vats" asp-action="Index">Vats table</a>
+                </td>
+                <td>
+                    Admin
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a asp-controller="Woods" asp-action="Index">Woods table</a>
+                </td>
+                <td>
+                    Admin
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a asp-controller="Order" asp-action="Index">Order table</a>
+                </td>
+                <td>
+                    Moder
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a asp-controller="Contracts" asp-action="Index">Contracts table</a>
+                </td>
+                <td>
+                    Moder
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a asp-controller="Details" asp-action="Index">Order details table</a>
+                </td>
+                <td>
+                    Moder
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </table>

@@ -1,0 +1,65 @@
+﻿@model IEnumerable<ASPNetCoreAPI.AccessoryId>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AccName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DescriptionOfAccessory)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Inventory)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PartnerId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DescriptionOfAccessory)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Inventory)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PartnerId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.AccessoryId1">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.AccessoryId1">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.AccessoryId1">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
