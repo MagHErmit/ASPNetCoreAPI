@@ -19,6 +19,12 @@ namespace ASPNetCoreAPI.Controllers
             _context = context;
         }
 
+        public JsonResult Get(int orderId)
+        {
+            Contract member = _context.Contract.FirstOrDefault(m => m.OrderId == orderId);
+            return Json(member);
+        }
+
         // GET: Contracts
         [Authorize(Roles = "3")]
         public async Task<IActionResult> Index()
