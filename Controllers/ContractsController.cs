@@ -92,6 +92,24 @@ namespace ASPNetCoreAPI.Controllers
             return View(contract);
         }
 
+        public async void SetProductionProcess(int idContract, int idProductionProcess)
+        {
+            try
+            {
+                Contract contract = _context.Contract.FirstOrDefault(m => m.ContractId == idContract);
+                if (contract != null)
+                {
+                    contract.ProductionProcess = idProductionProcess;
+                    _context.Update(contract);
+                    await _context.SaveChangesAsync();
+                }
+            }
+            catch
+            {
+
+            }
+        }
+
         // POST: Contracts/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.

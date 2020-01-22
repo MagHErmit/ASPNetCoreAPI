@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ASPNetCoreAPI;
 using Microsoft.AspNetCore.Authorization;
+using Newtonsoft.Json.Linq;
 
 namespace ASPNetCoreAPI.Controllers
 {
@@ -69,6 +70,34 @@ namespace ASPNetCoreAPI.Controllers
             return View(customers);
         }
 
+        public async void AppEdit(string json)
+        {
+            try
+            {
+                var customer = JObject.Parse(json);
+                Customers customers = new Customers()
+                {
+                    CustomerId = Convert.ToInt32(customer["customerId"]),
+                    IdNumber = customer["idNumber"].ToString(),
+                    IdDocumentName = Convert.ToInt32(customer["idDocumentName"]),
+                    City = customer["city"].ToString(),
+                    PhoneNumber = customer["phoneNumber"].ToString(),
+                    Email = customer["email"].ToString(),
+                    Address = customer["address"].ToString(),
+                    DateOfBirth = DateTime.Parse(customer["dateOfBirth"].ToString()),
+                    FirstName = customer["firstName"].ToString(),
+                    SecondName = customer["secondName"].ToString()
+                };
+
+                _context.Update(customers);
+                await _context.SaveChangesAsync();
+            }
+            catch
+            {
+
+            }
+        }
+
         // GET: Customers/Edit/5
         [Authorize(Roles = "2")]
         public async Task<IActionResult> Edit(int? id)
@@ -94,10 +123,10 @@ namespace ASPNetCoreAPI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("CustomerId,FirstName,SecondName,DateOfBirth,Address,City,Email,PhoneNumber,IdNumber,IdDocumentName")] Customers customers)
         {
-            if (id != customers.CustomerId)
-            {
-                return NotFound();
-            }
+            //if (id != customers.CustomerId)
+            //{
+            //    return NotFound();
+            //}
 
             if (ModelState.IsValid)
             {
