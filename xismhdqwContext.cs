@@ -20,6 +20,7 @@ namespace ASPNetCoreAPI
         public virtual DbSet<Boat> Boat { get; set; }
         public virtual DbSet<BoatType> BoatType { get; set; }
         public virtual DbSet<Colours> Colours { get; set; }
+        public virtual DbSet<Coments> Coments { get; set; }
         public virtual DbSet<Contract> Contract { get; set; }
         public virtual DbSet<Customers> Customers { get; set; }
         public virtual DbSet<Details> Details { get; set; }
@@ -135,6 +136,22 @@ namespace ASPNetCoreAPI
                     .ValueGeneratedNever();
 
                 entity.Property(e => e.Colour).IsRequired();
+            });
+
+            modelBuilder.Entity<Coments>(entity =>
+            {
+                entity.HasKey(e => e.ComentId)
+                    .HasName("Coments_pkey");
+
+                entity.Property(e => e.ComentId)
+                    .HasColumnName("coment_id")
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.BoatId).HasColumnName("boat_id");
+
+                entity.Property(e => e.Coment).HasColumnName("coment");
+
+                entity.Property(e => e.CustomerId).HasColumnName("customer_id");
             });
 
             modelBuilder.Entity<Contract>(entity =>
