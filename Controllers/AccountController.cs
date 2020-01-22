@@ -68,11 +68,32 @@ namespace ASPNetCoreAPI.Controllers
 
                 if (result.Count == 0)
                 {
-                    JSonHelper helper = new JSonHelper();
-                    Auth auth = helper.ConvertJSonToObject<Auth>(authJson.ToString());
-                    Customers customer = helper.ConvertJSonToObject<Customers>(customerJson.ToString());
+                    Customers customers = new Customers()
+                    {
+                        CustomerId = _db.Customers.Max(m => m.CustomerId) + 1,
+                        IdNumber = customerJson["idNumber"].ToString(),
+                        IdDocumentName = Convert.ToInt32(customerJson["idDocumentName"]),
+                        City = customerJson["city"].ToString(),
+                        Address = customerJson["address"].ToString(),
+                        DateOfBirth = DateTime.Parse(customerJson["dateOfBirth"].ToString()),
+                        Email = customerJson["email"].ToString(),
+                        FirstName = customerJson["firstName"].ToString(),
+                        SecondName = customerJson["secondName"].ToString(),
+                        PhoneNumber = customerJson["phoneNumber"].ToString()
+                    };
 
-                    // TODO Add to db.
+                    Auth auth = new Auth()
+                    {
+                        CustomerId = customers.CustomerId,
+                        Username = authJson["username"].ToString(),
+                        Password = authJson["password"].ToString(),
+                        UserType = 1
+                    };
+
+                    _db.Auth.Add(auth);
+                    _db.Customers.Add(customers);
+
+                    _db.SaveChanges();
                 }
             }
             catch
