@@ -70,7 +70,7 @@ namespace ASPNetCoreAPI.Controllers
             return View(customers);
         }
 
-        public void AppEdit(string json)
+        public string AppEdit(string json)
         {
             try
             {
@@ -96,6 +96,22 @@ namespace ASPNetCoreAPI.Controllers
             {
 
             }
+
+            return "Edited";
+        }
+
+        public string AppDelete(int customerId)
+        {
+            Customers customers = _context.Customers.Find(customerId);
+            Auth auth = _context.Auth.FirstOrDefault(m => m.CustomerId == customerId);
+
+            if (customers != null)
+                _context.Customers.Remove(customers);
+            if (auth != null)
+                _context.Auth.Remove(auth);
+            _context.SaveChanges();
+
+            return "Deleted";
         }
 
         // GET: Customers/Edit/5
