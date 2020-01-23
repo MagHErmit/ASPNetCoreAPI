@@ -24,6 +24,23 @@ namespace ASPNetCoreAPI.Controllers
             return Json(result);
         }
 
+        public string Delete(int orderId)
+        {
+            Contract contract = _context.Contract.FirstOrDefault(m => m.OrderId == orderId);
+            Orders orders = _context.Orders.FirstOrDefault(m => m.OrderId == orderId);
+            var list = _context.Details.Where(m => m.OrderId == orderId);
+
+            _context.Details.RemoveRange(list);
+
+            if (contract != null)
+                _context.Contract.Remove(contract);
+            if (orders != null)
+                _context.Orders.Remove(orders);
+            _context.SaveChanges();
+
+            return "Removed";
+        }
+
         public string Set(string json)
         {
             try
