@@ -70,7 +70,7 @@ namespace ASPNetCoreAPI.Controllers
             return View(customers);
         }
 
-        public async void AppEdit(string json)
+        public void AppEdit(string json)
         {
             try
             {
@@ -90,7 +90,7 @@ namespace ASPNetCoreAPI.Controllers
                 };
 
                 _context.Update(customers);
-                await _context.SaveChangesAsync();
+                _context.SaveChangesAsync();
             }
             catch
             {

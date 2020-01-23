@@ -92,21 +92,24 @@ namespace ASPNetCoreAPI.Controllers
             return View(contract);
         }
 
-        public async void SetProductionProcess(int idContract, int idProductionProcess)
+        public string SetProductionProcess(int idContract, int idProductionProcess)
         {
             try
             {
-                Contract contract = _context.Contract.FirstOrDefault(m => m.ContractId == idContract);
+                Contract contract = _context.Contract.Find(idContract);
                 if (contract != null)
                 {
                     contract.ProductionProcess = idProductionProcess;
                     _context.Update(contract);
-                    await _context.SaveChangesAsync();
+                    _context.SaveChanges();
+                    return "Contract updated";
                 }
-            }
+
+                return "Contract is not found";
+            }   
             catch
             {
-
+                return "Error";
             }
         }
 
